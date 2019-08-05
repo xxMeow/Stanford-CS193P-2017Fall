@@ -15,18 +15,20 @@ struct Concentration {
     
     private var indexOfOneAndOnlyFaceUpCard: Int? {
         get { // Get the indexOfOneAndOnlyFaceUpCard by looking up all the cards on the board
-            var foundIndex: Int?
-            for index in cards.indices {
-                if cards[index].isFaceUp {
-                    if foundIndex == nil {
-                        foundIndex = index
-                    } else { // If foundIndex has been set before this iteration (2 cards are facing up at this time)
-                        foundIndex = nil
-                    }
-                }
-            }
+            return cards.indices.filter { cards[$0].isFaceUp }.oneAndOnly
             
-            return foundIndex
+//            var foundIndex: Int?
+//            for index in cards.indices {
+//                if cards[index].isFaceUp {
+//                    if foundIndex == nil {
+//                        foundIndex = index
+//                    } else { // If foundIndex has been set before this iteration (2 cards are facing up at this time)
+//                        foundIndex = nil
+//                    }
+//                }
+//            }
+//            
+//            return foundIndex
         }
         
         set { // The right value will be seemd as newValue by default
@@ -84,5 +86,11 @@ struct Concentration {
             cards[randomCardB] = tempIdentifier
         }
         
+    }
+}
+
+extension Collection {
+    var oneAndOnly: Element? {
+        return count == 1 ? first : nil
     }
 }

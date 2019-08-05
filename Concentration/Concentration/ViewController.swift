@@ -15,8 +15,17 @@ class ViewController: UIViewController {
     
     var flipCount = 0 {
         didSet {
-            flipCountLabel.text = "Flips: \(flipCount)"
+            updateFlipCountLable()
         }
+    }
+    
+    private func updateFlipCountLable() {
+        let attributes: [NSAttributedString.Key:Any] = [
+            .strokeWidth : 5.0,
+            .strokeColor : #colorLiteral(red: 0.3226475716, green: 0.1143690571, blue: 0.4838612676, alpha: 1)
+        ]
+        let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
+        flipCountLabel.attributedText = attributedString
     }
     
     var scoreRecord = 0 {
@@ -25,7 +34,11 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet weak var flipCountLabel: UILabel! {
+        didSet {
+            updateFlipCountLable()
+        }
+    }
     
     @IBOutlet weak var scoreRecordLabel: UILabel!
     
@@ -82,13 +95,15 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var gameOverLabel: UILabel!
     
-    var emojiChoices = ["🔮", "🎃", "👻", "🕷", "🕸", "⚰️", "🌙", "⚡️"]
+//    var emojiChoices = ["🔮", "🎃", "👻", "🕷", "🕸", "⚰️", "🌙", "⚡️"]
+    var emojiChoices = "🔮🎃👻🕷🕸⚰️🌙⚡️"
     
     var emoji = [Card:String]()
     func emoji(for card: Card) -> String {
         // If the card has no emoji, and there are usable emoji in the emojiChoices left
         if emoji[card] == nil, emojiChoices.count > 0 {
-            emoji[card] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+            let  randomStringIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: emojiChoices.count.arc4random)
+            emoji[card] = String(emojiChoices.remove(at: randomStringIndex))
         }
         
         return emoji[card] ?? "!"
