@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ConcentrationViewController: UIViewController {
     
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
     // In case of the number of cards being odd
@@ -67,16 +67,18 @@ class ViewController: UIViewController {
     }
     
     func updateViewFromModel() {
-        for index in cardButtons.indices { // Traversal all the cardButtons
-            let button = cardButtons[index]
-            let card = game.cards[index]
-            
-            if card.isFaceUp { // Show the front
-                button.setTitle(emoji(for: card), for: UIControl.State.normal)
-                button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            } else { // Show the back (if the card is still on the board)
-                button.setTitle("", for: UIControl.State.normal)
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0) : #colorLiteral(red: 0.3226475716, green: 0.1143690571, blue: 0.4838612676, alpha: 1)
+        if cardButtons != nil {
+            for index in cardButtons.indices { // Traversal all the cardButtons
+                let button = cardButtons[index]
+                let card = game.cards[index]
+                
+                if card.isFaceUp { // Show the front (Light-purple background with emoji)
+                    button.setTitle(emoji(for: card), for: UIControl.State.normal)
+                    button.backgroundColor = #colorLiteral(red: 0.476841867, green: 0.5048075914, blue: 1, alpha: 1)
+                } else { // Show the back (Transparent or purple background without emoji) if the card is still on the board
+                    button.setTitle("", for: UIControl.State.normal)
+                    button.backgroundColor = card.isMatched ? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0) : #colorLiteral(red: 0.3226475716, green: 0.1143690571, blue: 0.4838612676, alpha: 1)
+                }
             }
         }
     }
@@ -94,6 +96,14 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var gameOverLabel: UILabel!
+    
+    var theme: String? {
+        didSet {
+            emojiChoices = theme ?? ""
+            emoji = [:]
+            updateViewFromModel()
+        }
+    }
     
 //    var emojiChoices = ["🔮", "🎃", "👻", "🕷", "🕸", "⚰️", "🌙", "⚡️"]
     var emojiChoices = "🔮🎃👻🕷🕸⚰️🌙⚡️"
