@@ -8,6 +8,10 @@
 
 import UIKit
 
+/**
+ * Configure the view of a card.
+ * Overrided the method draw() to draw a card in a CGRect.
+ */
 @IBDesignable
 class PlayingCardView: UIView
 {

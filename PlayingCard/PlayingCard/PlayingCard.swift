@@ -8,6 +8,11 @@
 
 import Foundation
 
+/**
+ * Store the data of a card.
+ * Include its suit, rank, the order of the pips on it, and offer the readable description of it.
+ * With the free deafult initializer, it generates a card with given suit and rank.
+ */
 struct PlayingCard: CustomStringConvertible {
     var description: String { return "\(rank)\(suit)" }
     

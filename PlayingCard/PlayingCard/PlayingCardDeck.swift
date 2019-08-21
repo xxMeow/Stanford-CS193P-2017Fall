@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+ * A whole deck of cards stored in an array.
+ * Providing the method draw() which return a card in the deck randomly when the deck is not empty.
+ */
 struct PlayingCardDeck {
     private(set) var cards = [PlayingCard]()
     

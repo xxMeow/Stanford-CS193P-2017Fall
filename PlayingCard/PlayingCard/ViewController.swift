@@ -8,6 +8,11 @@
 
 import UIKit
 
+/**
+ * Connected to a rectangle outlet on the screen.
+ * Generate a deck of cards and draw one of them in the rectangle.
+ * Provide swipe(show next in the deck), pinch(zoom in/out) and tap(flip) gestures for the drawn card.
+ */
 class ViewController: UIViewController {
     
     var deck = PlayingCardDeck()
@@ -39,11 +44,9 @@ class ViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
 
 }
 
