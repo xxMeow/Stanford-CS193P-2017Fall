@@ -36,6 +36,7 @@ struct PlayingCard: CustomStringConvertible {
         case face(String)
         case numeric(Int)
         
+        // The numeric index of each rank
         var order: Int {
             switch self {
             case .ace: return 1
