@@ -19,6 +19,26 @@ class ViewController: UIViewController {
     
     @IBOutlet private var cardViews: [PlayingCardView]!
     
+    /** Add animator */
+    lazy var animator = UIDynamicAnimator(referenceView: view)
+    /** Add behavior */
+    // Collisions betwwen cards and boundaries
+    lazy var collisionBehavior: UICollisionBehavior = {
+        let behavior = UICollisionBehavior()
+        behavior.translatesReferenceBoundsIntoBoundary = true
+        animator.addBehavior(behavior)
+        return behavior // Return from closure
+    }()
+    // Collisions among cards
+    lazy var itemBehavior: UIDynamicItemBehavior = {
+        let behavior = UIDynamicItemBehavior()
+        behavior.allowsRotation = false
+        behavior.elasticity = 1.0 // Moving without accelerating situation
+        behavior.resistance = 0
+        animator.addBehavior(behavior)
+        return behavior
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +58,22 @@ class ViewController: UIViewController {
             
             // Add gesture recognizer
             cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(flipCard(_:))))
+            
+            /** Add items to card */
+            collisionBehavior.addItem(cardView)
+            itemBehavior.addItem(cardView)
+            
+            /** Make cards moving */
+            // Push each card
+            // (Using a push behavior for every card will get all of them pushed in the same direction)
+            let push = UIPushBehavior(items: [cardView], mode: .instantaneous) // Arg: $items will be pushed in $mode
+            // Since it is instantaneous push, we'ar gonna wanna clean up after it later
+            push.angle = (2 * CGFloat.pi).arc4random
+            push.magnitude = CGFloat(1.0) + CGFloat (2.0).arc4random // Set megnitude between 1.0~3.0
+            push.action = { [unowned push] in // Use unowned to avoid the memory cycle
+                push.dynamicAnimator?.removeBehavior(push) // Tell the dynamicAnimator(if it has one) to clean up itself
+            }
+            animator.addBehavior(push)
         }
     }
     
@@ -123,3 +159,14 @@ class ViewController: UIViewController {
 
 }
 
+extension CGFloat {
+    var arc4random: CGFloat {
+        if self > 0 {
+            return CGFloat.random(in: 0...self)
+        } else if self < 0 {
+            return -CGFloat.random(in: 0...abs(self))
+        } else {
+            return 0
+        }
+    }
+}
