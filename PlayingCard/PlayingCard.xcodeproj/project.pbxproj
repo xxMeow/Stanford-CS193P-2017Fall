@@ -15,6 +15,7 @@
 		220E32BB22FB26600070745A /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E32BA22FB26600070745A /* PlayingCard.swift */; };
 		220E32BD22FB40280070745A /* PlayingCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E32BC22FB40280070745A /* PlayingCardDeck.swift */; };
 		227C3B2122FC13240097FE63 /* PlayingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227C3B2022FC13240097FE63 /* PlayingCardView.swift */; };
+		22BEF17C230EDE7A00CA2622 /* CardBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEF17B230EDE7A00CA2622 /* CardBehavior.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		220E32BA22FB26600070745A /* PlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
 		220E32BC22FB40280070745A /* PlayingCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDeck.swift; sourceTree = "<group>"; };
 		227C3B2022FC13240097FE63 /* PlayingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardView.swift; sourceTree = "<group>"; };
+		22BEF17B230EDE7A00CA2622 /* CardBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBehavior.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		220E32A622FB24480070745A /* PlayingCard */ = {
 			isa = PBXGroup;
 			children = (
+				22BEF17B230EDE7A00CA2622 /* CardBehavior.swift */,
 				220E32A922FB24480070745A /* ViewController.swift */,
 				220E32BA22FB26600070745A /* PlayingCard.swift */,
 				227C3B2022FC13240097FE63 /* PlayingCardView.swift */,
@@ -157,6 +160,7 @@
 				220E32BB22FB26600070745A /* PlayingCard.swift in Sources */,
 				227C3B2122FC13240097FE63 /* PlayingCardView.swift in Sources */,
 				220E32A822FB24480070745A /* AppDelegate.swift in Sources */,
+				22BEF17C230EDE7A00CA2622 /* CardBehavior.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
