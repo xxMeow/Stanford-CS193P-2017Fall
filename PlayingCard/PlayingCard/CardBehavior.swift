@@ -37,7 +37,23 @@ class CardBehavior: UIDynamicBehavior
     private func push(_ item: UIDynamicItem) { // Arg: $item gets pushed
         let push = UIPushBehavior(items: [item], mode: .instantaneous) // Arg: $items will be pushed in $mode
         // Since it is instantaneous push, we're gonna wanna clean up after it later
-        push.angle = (2 * CGFloat.pi).arc4random
+        
+        if let referenceBounds = dynamicAnimator?.referenceView?.bounds {
+            // Always push the card towards center
+            let center = CGPoint(x: referenceBounds.midX, y: referenceBounds.midY)
+            switch (item.center.x, item.center.y) {
+            case let (x, y) where x < center.x && y < center.y:
+                push.angle = (CGFloat.pi/2).arc4random
+            case let (x, y) where x > center.x && y < center.y:
+                push.angle = CGFloat.pi - (CGFloat.pi/2).arc4random
+            case let (x, y) where x < center.x && y > center.y:
+                push.angle = (-CGFloat.pi/2).arc4random
+            case let (x, y) where x > center.x && y > center.y:
+                push.angle = CGFloat.pi + (CGFloat.pi/2).arc4random
+            default:
+                push.angle = (CGFloat.pi*2).arc4random
+            }
+        }
         push.magnitude = CGFloat(1.0) + CGFloat (2.0).arc4random // Set megnitude between 1.0~3.0
         // Remove push as soon as it happend
         push.action = { [unowned push, weak self] in // Use unowned to avoid the memory cycle
