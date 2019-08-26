@@ -18,16 +18,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fbV-nr-UtQ">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0Z-SH-hEK">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="896" translatesAutoresizingMaskIntoConstraints="NO" id="fbV-nr-UtQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="fbV-nr-UtQ" secondAttribute="bottom" id="DQY-im-upL"/>
+                                    <constraint firstItem="fbV-nr-UtQ" firstAttribute="leading" secondItem="J0Z-SH-hEK" secondAttribute="leading" id="gE6-ce-Dng"/>
+                                    <constraint firstItem="fbV-nr-UtQ" firstAttribute="top" secondItem="J0Z-SH-hEK" secondAttribute="top" id="jm3-LV-GB8"/>
+                                    <constraint firstItem="fbV-nr-UtQ" firstAttribute="trailing" secondItem="J0Z-SH-hEK" secondAttribute="trailing" id="yoJ-go-6vv"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fbV-nr-UtQ" firstAttribute="top" secondItem="WtT-G1-gaU" secondAttribute="top" id="XJo-1v-xA9"/>
-                            <constraint firstItem="fbV-nr-UtQ" firstAttribute="trailing" secondItem="WtT-G1-gaU" secondAttribute="trailing" id="fUz-D3-Qn1"/>
-                            <constraint firstItem="fbV-nr-UtQ" firstAttribute="leading" secondItem="WtT-G1-gaU" secondAttribute="leading" id="gHU-Vh-EEO"/>
-                            <constraint firstAttribute="bottom" secondItem="fbV-nr-UtQ" secondAttribute="bottom" id="xCL-hD-u5Q"/>
+                            <constraint firstItem="J0Z-SH-hEK" firstAttribute="leading" secondItem="WtT-G1-gaU" secondAttribute="leading" id="FRh-I5-ewe"/>
+                            <constraint firstAttribute="bottom" secondItem="J0Z-SH-hEK" secondAttribute="bottom" id="Zt4-ve-sLh"/>
+                            <constraint firstItem="J0Z-SH-hEK" firstAttribute="top" secondItem="WtT-G1-gaU" secondAttribute="top" id="aFr-Nq-9iw"/>
+                            <constraint firstItem="J0Z-SH-hEK" firstAttribute="trailing" secondItem="WtT-G1-gaU" secondAttribute="trailing" id="aaS-h0-WB9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7z1-6D-eMx"/>
                     </view>
