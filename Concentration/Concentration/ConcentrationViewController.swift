@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ConcentrationViewController: UIViewController {
+class ConcentrationViewController: VCLLoggingViewController {
+    
+    override var vclLoggingName: String {
+        return "Game"
+    }
     
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
     // In case of the number of cards being odd
