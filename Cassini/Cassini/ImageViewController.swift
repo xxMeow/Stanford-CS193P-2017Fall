@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageViewController: UIViewController {
+class ImageViewController: UIViewController, UIScrollViewDelegate {
     
     var imageURL: URL? {
         didSet {
@@ -41,8 +41,15 @@ class ImageViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
+            scrollView.minimumZoomScale = 1/25
+            scrollView.maximumZoomScale = 1.0
+            scrollView.delegate = self
             scrollView.addSubview(imageView)
         }
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView // It is the subview that we want to zoom in/out when we pinch
     }
     
     var imageView = UIImageView()
