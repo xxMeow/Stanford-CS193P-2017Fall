@@ -28,7 +28,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
             // Every time set the imageView, resize it
             imageView.sizeToFit()
             // And then resize the content size to be equal to the imageView
-            scrollView.contentSize = imageView.frame.size
+            scrollView?.contentSize = imageView.frame.size // Mark scrollView as optional then this line will be ignored if scrollView is nil
         }
     }
     
@@ -54,6 +54,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     
     var imageView = UIImageView()
     
+    // Fetch the image from internet by the imageURL
     private func fetchImage() {
         if let url = imageURL {
             let urlContents = try? Data(contentsOf: url)
