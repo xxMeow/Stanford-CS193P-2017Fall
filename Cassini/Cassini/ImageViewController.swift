@@ -29,6 +29,8 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
             imageView.sizeToFit()
             // And then resize the content size to be equal to the imageView
             scrollView?.contentSize = imageView.frame.size // Mark scrollView as optional then this line will be ignored if scrollView is nil
+            
+            spinner?.stopAnimating()
         }
     }
     
@@ -38,6 +40,9 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
             fetchImage()
         }
     }
+    
+    /** This spinner will be spinning while fetching image from internet **/
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
@@ -57,9 +62,17 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     // Fetch the image from internet by the imageURL
     private func fetchImage() {
         if let url = imageURL {
-            let urlContents = try? Data(contentsOf: url)
-            if let imageData = urlContents {
-                 image = UIImage(data: imageData)
+            spinner.startAnimating()
+            
+            // Use the userInitiated queue to get image from internet
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                // Set self weak to prevent from the situation that user stopped getting image while fetching
+                let urlContents = try? Data(contentsOf: url)
+                DispatchQueue.main.async { // Use the main queue if it is idle now
+                    if let imageData = urlContents, url == self?.imageURL {
+                        self?.image = UIImage(data: imageData)
+                    }
+                }
             }
         }
     }
